@@ -58,10 +58,36 @@
  *        http://docs.joomla.org/Tutorial:Upgrade_Joomla_1.5_Extension_to_Joomla_1.6)
  *
  *     -- Frank Thommen <frank.thommen@gmx.net> Mon, 14 Feb 2011 16:00:00 +0200
+ * 
+ *     	09.2024   Ported to Joomla! J4   by HGH
+ *
+ *      + use-Statement:
+ *			use Joomla\CMS\Factory as JFactory;
+ *
+ *		-- replace: JRequest      (deprechiated in J4)
+ * ---
+ * 			J3   JRequest::getCmd('view') 
+ *             by  J4-code
+ *			J4   JFactory::getApplication()->getInput()->get('view')
+ * ---
+ *			J3	JRequest::getCmd('option') != 'com_content'
+ *      	J4  JFactory::getApplication()->getInput()->get('option') != 'com_content'
+ *
+ * 		--	outcommented because of errors
+ * ---
+ *			/*  
+ *				// HGH
+ *				if( !JFactory::getApplication()->isSite() )
+ *				return;
+ *				// HGH 
+ *
  */
 
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die('Restricted access');
+
+use Joomla\CMS\Factory as JFactory;    // HGH
+// use Joomla\CMS\Uri\Uri as JUri;        // HGH
 
 jimport( 'joomla.plugin.plugin' );
 
@@ -93,9 +119,12 @@ class plgContentAutoToc extends JPlugin
     {
       // I don't know why, but sometimes the plugin get's executed
       // on the admin page which produces error about the missing JSite.
+/*  
+	// HGH
       if( !JFactory::getApplication()->isSite() )
         return;
-
+	// HGH 
+*/
       $version = new JVersion;
       $joomla_1_5 = substr($version->getShortVersion(),0,3) == '1.5';
 
@@ -208,7 +237,9 @@ class plgContentAutoToc extends JPlugin
       }
       else
       {
-        $view = JRequest::getCmd('view');
+ //     $view = JRequest::getCmd('view');   // HGH 
+		$view = JFactory::getApplication()->getInput()->get('view');
+		
         if( !in_array( $view,
                        array_merge
                        (
@@ -222,7 +253,8 @@ class plgContentAutoToc extends JPlugin
                        ) ))
           return true;
           
-        if(    JRequest::getCmd('option') != 'com_content'
+    //    if(    JRequest::getCmd('option') != 'com_content'   // HGH 
+        if( JFactory::getApplication()->getInput()->get('option') != 'com_content' 
             || in_array
                (
                  $view,
@@ -372,8 +404,9 @@ class plgContentAutoToc extends JPlugin
         
         // Don't know why the hell php 5+ uses references by default (Isn't
         // Java enough? :/)
-        $uri = clone JFactory::getURI();        
-        
+ //     $uri = clone JFactory::getURI();                 // See: https://regularlabs.com/forum/sourcerer/50249-sourcerer-ans-api,-error-with-use-and-geturi
+		$uri = JURI::getInstance();   
+ 
         foreach( $structure->headings() as $heading )
         {
           while( $heading['level'] > $level )
@@ -438,13 +471,14 @@ class plgContentAutoToc extends JPlugin
      */
     protected function debugPrint(&$version, &$article)
     {
-      echo "\n<!-- AutoToC START (view=".JRequest::getCmd('view').")-->\n\n";
+//    echo "\n<!-- AutoToC START (view=" .JRequest::getCmd('view').")-->\n\n";
+      echo "\n<!-- AutoToC START (view=" .Joomla\CMS\Factory::getApplication()->getInput()->get('view') .")-->\n\n";
       echo '<div class="autotoc-run"><b>Running autotoc</b>';
       echo "\n<!-- AutoToC - version START -->\n\n";
-      var_dump($version);
+    //  var_dump($version);                                  // HGH
       echo "\n<!-- AutoToC - version END -->\n\n";
       echo "\n<!-- AutoToC - article START -->\n\n";
-      var_dump($article);
+    //  var_dump($article);                                  // HGH
       echo "\n<!-- AutoToC - article END -->\n\n";
       echo '</div>';
       echo "\n<!-- AutoToC END -->\n\n";
