@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="plugin" group="content" version="1.6.0" client="site" method="upgrade">
   <name>plg_content_autotoc</name>
-  <creationDate>January 2010</creationDate>
-  <author>TomProgs</author>
-  <authorEmail>admin@tomprogs.at</authorEmail>
-  <authorUrl>http://www.tomprogs.at</authorUrl>
+  <creationDate>January 2013</creationDate>
+  <author>HGH</author>
+  <authorEmail>joomla.hgh-esn@t-online.de</authorEmail>
+  <authorUrl>http://www.joomla.org</authorUrl>
   <copyright>
     Copyright (C) 2009, Straton IT
-    Copyright (C) 2010-2013 Thomas Geymayer. All rights reserved.
+    Copyright (C) 2010-2013 Thomas Geymayer. All rights reserved
+    Copyright (C) 2013-20.. Hans-Guenter Heiserholt. All rights reserved.
   </copyright>
   <license>http://www.gnu.org/licenses/gpl-3.0.html GNU/GPL</license>
-  <version>0.17.5-J1.6+</version>
+  <version>0.01-J4+</version>
   <description>PLG_CONTENT_AUTOTOC_DESC</description>
   <files>
       <filename plugin="autotoc">autotoc.php</filename>
@@ -114,10 +115,12 @@
             <option value="0">AUTO_TOC_SHOW</option>
             <option value="1">AUTO_TOC_HIDE</option>
         </field>
-      </fieldset>
-	  <fieldset name="Beschreibung">
-		<field name="toc" type="text" default="" label="PLG_CONTENT_AUTOTOCPLG_CONTENT_AUTOTOC" description="PLG_CONTENT_AUTOTOC_DESC"> </field>
-	  <fieldset>
+      </fieldset
+<!--
+	<fieldset name="Beschreibung">
+		<field  name="beschreibung" type="text" default="" label="Beschreibung-Button" description="PLG_CONTENT_AUTOTOC_DESC"></field>
+	<fieldset>
+-->
       <fieldset name="advanced">
         <field name="additional_views"
          type="text" default=""
