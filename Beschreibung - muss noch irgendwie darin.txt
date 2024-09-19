@@ -1,0 +1,47 @@
+Inhalt - Artikel Auto ToC
+Dieses Plugin generiert automatisch ein verlinktes Inhaltsverzeichnis, basierend auf der Hierarchie der Überschriften (h1-h6) im Text. Zusätzlich kann es auch sowohl zu den Einträgen im Inhaltsverzeichnis, als auch zu den Überschriften direkt im Text eine Numerierung hinzufügen.
+Dies ist eine verbesserte Version des Plugins Article Table of Contents - diese gibt valides XHML aus und hat ein paar erweiterte Konfigurationsoptionen.
+
+Einstellungen auf Artikelbasis
+Wenn man Einstellungen nur für manche Artikel anders setzen möchte, kann man dies über einen speziellen Tag im Artikeltext erreichen:
+
+{autotoc option1=value1|option2=value2|...|optionN=valueN}
+
+Positionierung und Aktivieren Deaktivieren
+Durch platzieren eines solchen Tags wird dieser durch das Inhaltsverzeichnis ersetzt und kann damit verwendet werden um die Position des Inhaltsverzeichnisses festzulegen. Weiters wird dabei auch das Inhaltsverzeichnis auch wenn das in den Plugin Einstellungen global deaktiviert wurde. Dadurch kann man nur in ein paar bestimmten Artikeln ein Inhaltsverzeichnis generieren lassen und die anderen Artikel unberührt lassen.
+Es ist auch der umgekehrt Weg möglich in dem man gobal das Erzeugen von Inhaltsverzeichnissen aktiviert und durch Einfügen eines Tags mit der Option enabled=no dieses für bestimmte Artikel unterbindet:
+
+{autotoc enabled=no}
+
+Layout
+Mit der Option layout=layoutname ist es möglich für bestimmte Artikel ein vom global eingestelltem Layout abweichendes Layout zu verwenden. Mögliche Werte dafür sind dropdown und list:
+
+{autotoc layout=dropdown}
+{autotoc enabled=no|layout=list} (Ja, ich weiß. Nicht sehr sinnvoll :) )
+
+Nummerierung
+Weiters ist es möglich das Generieren der automatischen Nummerierung sowohl im Text als auch im Inhaltsverzeichnis für bestimmte Artikel festzulegen:
+{autotoc addNumbering=true|addNumberingToc=false}
+
+Tags aus älteren Versionen
+In älteren versionen wurde { ArticleToC: enabled=no } und noch älteren Versionen (für Joomla 1.5) <!-- ArticleToC: enabled=no --> als Tag verwendet. Diese Tags funktioneren zwar weiterhin, sollte aber nicht mehr weiterverwendet werden, sondern durch ihre neue Form ersetzt. Nachfolgend ist eine Liste an möglichen Tags und ihrer empfohlenen Ersetzungen:
+
+{ ArticleToC: enabled=no } -> {autotoc enabled=no}
+{ ArticleToC: enabled=yes } -> {autotoc}
+{ ArticleToc: position=here } -> {autotoc}
+<!-- ArticleToC: enabled=no --> -> {autotoc enabled=no}
+<!-- ArticleToC: enabled=yes --> -> {autotoc}
+<!-- ArticleToc: position=here --> -> {autotoc}
+
+Aussehen verändern
+Das Aussehen des Inhaltsverzeichnisses kann mit CSS verändert werden. Dazu kann man den div-Container in dem das Inhaltsverzeichnis dargestellt wird über die Klasse autotoc ansprechen und verändern.
+
+Hinweis
+Wenn gleichzeitig mit diesem Plugin auch noch das pagebreak-Plugin eingesetzt wird, dann muss man die Reihenfolge der Plugins so anpassen, dass dieses Plugin nach dem pagebreak-Plugin ausgeführt wird. Bei einer Standardinstallation kann man den Wert 'Reihenfolge' bei diesem Plugin in der Pluginverwaltung zum Beispiel auf 10001 setzen. Dadurch erscheint zusätzlich zu dem Inhaltsverzeichnis über die verschiedenen Seiten noch das Inhaltsverzeichnis über die Überschriften.
+
+Hinweis for SEBLOD (und vermutlich die meisten anderen CCK Erweiterungen) Benutzer
+Um das Plugin zu verwenden muss nur autotoc vor seblod cck in der Reihenfolge in der Pluginverwaltung kommen.
+
+Autor
+Thomas Geymayer www.tomprogs.at
+
