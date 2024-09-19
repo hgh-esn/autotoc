@@ -238,7 +238,7 @@ class plgContentAutoToc extends JPlugin
       else
       {
  //     $view = JRequest::getCmd('view');   // HGH 
-		$view = JFactory::getApplication()->getInput()->get('view');
+	$view = JFactory::getApplication()->getInput()->get('view');
 		
         if( !in_array( $view,
                        array_merge
@@ -253,7 +253,7 @@ class plgContentAutoToc extends JPlugin
                        ) ))
           return true;
           
-    //    if(    JRequest::getCmd('option') != 'com_content'   // HGH 
+    //  if( JRequest::getCmd('option') != 'com_content'   // HGH 
         if( JFactory::getApplication()->getInput()->get('option') != 'com_content' 
             || in_array
                (
