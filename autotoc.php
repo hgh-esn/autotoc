@@ -86,7 +86,7 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die('Restricted access');
 
-use Joomla\CMS\Factory as JFactory;    // HGH
+// use Joomla\CMS\Factory as JFactory;    // HGH
 // use Joomla\CMS\Uri\Uri as JUri;        // HGH
 
 jimport( 'joomla.plugin.plugin' );
