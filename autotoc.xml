@@ -116,11 +116,6 @@
             <option value="1">AUTO_TOC_HIDE</option>
         </field>
       </fieldset
-<!--
-	<fieldset name="Beschreibung">
-		<field  name="beschreibung" type="text" default="" label="Beschreibung-Button" description="PLG_CONTENT_AUTOTOC_DESC"></field>
-	<fieldset>
--->
       <fieldset name="advanced">
         <field name="additional_views"
          type="text" default=""
